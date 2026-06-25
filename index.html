@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MozFind — Encontra a tua Casa</title>
+  <meta name="description" content="MozFind - Plataforma de anúncios imobiliários em Moçambique. Encontra casas, apartamentos e terrenos para alugar ou comprar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--g:#0b7a3a;--g2:#0a6b32;--g3:#e8f5e9;--bg:#f8fafb;--card:#fff;--text:#1a1a2e;--text2:#6b7280;--border:#e5e7eb;font-family:'Inter',sans-serif}
+    body{background:var(--bg);color:var(--text)}
+    header{background:var(--card);border-bottom:2px solid var(--g);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+    .inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{font-size:1.5rem;font-weight:800;color:var(--g);display:flex;align-items:center;gap:8px}
+    .logo span{font-size:0.85rem;font-weight:400;color:var(--text2)}
+    nav a{color:var(--text2);text-decoration:none;padding:8px 14px;border-radius:8px;font-weight:600;font-size:0.9rem;transition:all 0.2s}
+    nav a:hover{color:var(--g);background:var(--g3)}
+    .hero{background:linear-gradient(135deg, var(--g) 0%, #0d9e4a 100%);color:white;padding:60px 24px;text-align:center}
+    .hero h2{font-size:2.5rem;font-weight:800;margin-bottom:12px}
+    .hero p{font-size:1.1rem;opacity:0.9;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto}
+    .search-box{display:flex;max-width:600px;margin:0 auto;gap:8px;flex-wrap:wrap;justify-content:center}
+    .search-box input{flex:1;min-width:200px;padding:14px 18px;border:none;border-radius:12px;font-size:1rem;outline:none}
+    .search-box button{padding:14px 28px;background:#ff6b35;color:white;border:none;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.2s}
+    .search-box button:hover{background:#e55a2b;transform:translateY(-2px)}
+    main{max-width:1200px;margin:0 auto;padding:32px 24px}
+    .section-title{font-size:1.5rem;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+    .section-title span{font-size:0.9rem;font-weight:400;color:var(--text2)}
+    .filters{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+    .filter-btn{padding:8px 18px;border:2px solid var(--border);border-radius:10px;background:var(--card);color:var(--text2);font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s}
+    .filter-btn:hover{border-color:var(--g);color:var(--g)}
+    .filter-btn.active{background:var(--g);color:white;border-color:var(--g)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.25s;cursor:pointer}
+    .card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.08);border-color:var(--g)}
+    .card-img{width:100%;height:210px;object-fit:cover;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text2)}
+    .card-body{padding:16px}
+    .card-price{font-size:1.4rem;font-weight:800;color:var(--g)}
+    .card-price span{font-size:0.85rem;font-weight:400;color:var(--text2)}
+    .card-title{font-size:1rem;font-weight:700;margin:4px 0 6px}
+    .card-meta{display:flex;gap:12px;font-size:0.85rem;color:var(--text2)}
+    .card-meta span{display:flex;align-items:center;gap:4px}
+    .card-desc{font-size:0.85rem;color:var(--text2);margin-top:8px;line-height:1.5}
+    .card-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;margin-top:8px}
+    .tag-venda{background:#dbeafe;color:#1d4ed8}
+    .tag-aluguer{background:#fef3c7;color:#b45309}
+    .no-results{text-align:center;padding:60px 20px;color:var(--text2);font-size:1.1rem}
+    footer{text-align:center;padding:24px;color:var(--text2);font-size:0.85rem;border-top:1px solid var(--border);margin-top:40px}
+    footer strong{color:var(--g)}
+    @media(max-width:768px){
+      .hero h2{font-size:1.8rem}
+      .grid{grid-template-columns:1fr}
+      .inner{flex-direction:column;text-align:center}
+      .card-img{height:180px}
+    }
+  </style>
+<script src="/script.js" defer></script></head>
+<body>
+  <header>
+    <div class="inner">
+      <div class="logo">🏡 MozFind <span>— Encontra a tua Casa</span></div>
+      <nav><a href="#" class="active">Home</a><a href="#anunciar">Anunciar</a><a href="#contacto">Contacto</a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>Encontra o Teu Novo Lar</h2>
+    <p>Milhares de imóveis em Moçambique — casas, apartamentos, terrenos e mais. Aluga ou compra com confiança.</p>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Pesquisar por cidade, bairro ou tipo..." autocomplete="off">
+      <button onclick="filterListings()">🔍 Pesquisar</button>
+    </div>
+  </section>
+
+  <main>
+    <div class="section-title">🏠 Imóveis em Destaque <span id="count-label">(12 anúncios)</span></div>
+    <div class="filters" id="type-filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="casa">Casas</button>
+      <button class="filter-btn" data-filter="apartamento">Apartamentos</button>
+      <button class="filter-btn" data-filter="terreno">Terrenos</button>
+      <button class="filter-btn" data-filter="venda">Venda</button>
+      <button class="filter-btn" data-filter="aluguer">Aluguer</button>
+    </div>
+    <div class="grid" id="listings-grid"></div>
+  </main>
+
+  <footer>
+    <p><strong>MozFind</strong> — Plataforma Imobiliária Moçambicana</p>
+    <p>Feito com ❤️ para Edmilson | 🐉 Trycca</p>
+  </footer>
+
+  <script>
+    const listings = [
+      {id:1,title:"Casa T3 com Piscina",type:"casa",deal:"venda",price:4500000,location:"Maputo — Sommerschield",rooms:3,bath:2,area:220,img:"🏡",desc:"Casa moderna com piscina, jardim e churrasqueira. Garagem para 2 carros. Bairro nobre e seguro."},
+      {id:2,title:"Apartamento T2 à Beira-Mar",type:"apartamento",deal:"aluguer",price:35000,location:"Maputo — Marginal",rooms:2,bath:1,area:95,img:"🏢",desc:"Vista deslumbrante para o mar. Condomínio com segurança 24h, piscina e ginásio."},
+      {id:3,title:"Terreno 800m² — Zona Industrial",type:"terreno",deal:"venda",price:1200000,location:"Matola — Machava",rooms:0,bath:0,area:800,img:"🗺️",desc:"Terreno plano com documentação em ordem. Ideal para armazém ou construção comercial."},
+      {id:4,title:"Moradia T4 com Quintal",type:"casa",deal:"aluguer",price:28000,location:"Maputo — Alto Maé",rooms:4,bath:2,area:180,img:"🏡",desc:"Casa ampla com grande quintal, ideal para famílias. Cozinha equipada e áreas sociais generosas."},
+      {id:5,title:"Apartamento T1 Mobiliado",type:"apartamento",deal:"aluguer",price:18000,location:"Maputo — Central",rooms:1,bath:1,area:50,img:"🏢",desc:"Apartamento completo para solteiros ou casais. Próximo de transportes e comércio."},
+      {id:6,title:"Casa T3 em Condomínio",type:"casa",deal:"venda",price:3200000,location:"Matola — T3",rooms:3,bath:2,area:160,img:"🏡",desc:"Condomínio fechado com segurança, campo de jogos e área de lazer. Excelente investimento."},
+      {id:7,title:"Terreno Urbano 500m²",type:"terreno",deal:"venda",price:850000,location:"Maputo — Malhangalene",rooms:0,bath:0,area:500,img:"🗺️",desc:"Ótima localização, perto de escolas e supermercados. Pronto para construir."},
+      {id:8,title:"Flat T2 Vista Cidade",type:"apartamento",deal:"venda",price:2100000,location:"Maputo — Polana",rooms:2,bath:1,area:88,img:"🏢",desc:"Flat no 12º andar com vista panorâmica. Acabamentos de luxo, 2 vagas de garagem."},
+      {id:9,title:"Casa T5 com Campo de Ténis",type:"casa",deal:"venda",price:8500000,location:"Maputo — Costa do Sol",rooms:5,bath:4,area:450,img:"🏡",desc:"Propriedade exclusiva com campo de ténis, piscina olímpica e casa de hóspedes."},
+      {id:10,title:"Apartamento T3 Novo",type:"apartamento",deal:"aluguer",price:42000,location:"Maputo — Sommerschield",rooms:3,bath:2,area:130,img:"🏢",desc:"Acabamento de luxo, ar condicionado central, cozinha planeada. Vagas de garagem."},
+      {id:11,title:"Terreno Comercial 1200m²",type:"terreno",deal:"venda",price:2100000,location:"Boane — Bairro Industrial",rooms:0,bath:0,area:1200,img:"🗺️",desc:"Grande terreno com acesso asfaltado. Próximo da EN4 e futura zona de desenvolvimento."},
+      {id:12,title:"Casa T2 Charneira",type:"casa",deal:"aluguer",price:15000,location:"Maputo — Chamanculo",rooms:2,bath:1,area:90,img:"🏡",desc:"Casa simples mas aconchegante. Pátio com espaço para estacionar. Bairro tranquilo."},
+      {id:13,title:"Loft T1 Industrial",type:"apartamento",deal:"venda",price:1700000,location:"Maputo — Baixa",rooms:1,bath:1,area:70,img:"🏢",desc:"Loft estilo industrial com pé-direito duplo. Ideal para jovem profissional ou investidor."},
+      {id:14,title:"Casa T3 em Xipamanine",type:"casa",deal:"aluguer",price:12000,location:"Maputo — Xipamanine",rooms:3,bath:1,area:120,img:"🏡",desc:"Casa com pátio, curral e anexo. Zona movimentada com comércio perto."},
+      {id:15,title:"Terreno Agrícola 5 Hectares",type:"terreno",deal:"venda",price:3500000,location:"Maputo — Moamba",rooms:0,bath:0,area:50000,img:"🌿",desc:"Terreno fértil com fonte de água natural. Ideal para agricultura ou eco-turismo."}
+    ];
+
+    function formatPrice(p){return p.toLocaleString('pt-MZ')+" MZN"}
+    function showListings(list){
+      const g=document.getElementById('listings-grid');
+      const c=document.getElementById('count-label');
+      if(list.length===0){g.innerHTML='<div class="no-results">Nenhum imóvel encontrado 😕<br><small>Tenta ajustar os filtros ou a pesquisa.</small></div>';c.textContent='(0 anúncios)';return}
+      c.textContent=`(${list.length} anúncio${list.length!==1?'s':''})`;
+      g.innerHTML=list.map(p=>`
+        <div class="card">
+          <div class="card-img">${p.img}</div>
+          <div class="card-body">
+            <div class="card-price">${formatPrice(p.price)} <span>${p.deal==='venda'?'venda':'/mês'}</span></div>
+            <div class="card-title">${p.title}</div>
+            <div class="card-meta">
+              <span>📍 ${p.location}</span>
+              ${p.rooms?`<span>🛏️ ${p.rooms} quartos</span>`:''}
+              ${p.bath?`<span>🚿 ${p.bath} wc</span>`:''}
+              <span>📐 ${p.area}m²</span>
+            </div>
+            <div class="card-desc">${p.desc}</div>
+            <span class="card-tag ${p.deal==='venda'?'tag-venda':'tag-aluguer'}">${p.deal==='venda'?'Venda':'Aluguer'}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterListings(){
+      const q=document.getElementById('search-input').value.toLowerCase().trim();
+      const active=document.querySelector('.filter-btn.active');
+      const filter=active?active.dataset.filter:'all';
+
+      let filtered=listings.filter(p=>{
+        if(filter!=='all' && p.type!==filter && p.deal!==filter) return false;
+        if(q){
+          const txt=(p.title+' '+p.location+' '+p.type+' '+p.desc).toLowerCase();
+          if(!txt.includes(q)) return false;
+        }
+        return true;
+      });
+      showListings(filtered);
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        filterListings();
+      });
+    });
+    document.getElementById('search-input').addEventListener('input',filterListings);
+
+    document.querySelector('.search-box button').addEventListener('click',filterListings);
+
+    showListings(listings);
+  </script>
+</body>
+</html>
